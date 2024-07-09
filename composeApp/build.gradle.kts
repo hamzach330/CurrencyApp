@@ -1,20 +1,19 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
-    alias(libs.plugins.compose.compiler)
+    //alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlinxSerialization)
     alias(libs.plugins.realm.plugin)
 }
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class) compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "11"
+
+            }
         }
     }
 
@@ -44,10 +43,10 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
 
             implementation(libs.koin.core)
-            implementation(libs.voygar.navigator)
-            implementation(libs.voygar.screen.model)
-            implementation(libs.voygar.transition)
-            implementation(libs.voygar.koin)
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.screen.model)
+            implementation(libs.voyager.transitions)
+            implementation(libs.voyager.koin)
 
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
@@ -55,8 +54,8 @@ kotlin {
 
             implementation(libs.kotlinx.datetime)
 
-            implementation(libs.multiplatform.setting.no.arg)
-            implementation(libs.multiplatform.setting.coroutine)
+            implementation(libs.multiplatform.settings.no.arg)
+            implementation(libs.multiplatform.settings.coroutines)
 
             implementation(libs.mongodb.realm)
             implementation(libs.kotlin.coroutines)
@@ -69,6 +68,8 @@ kotlin {
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
+
+        task("testClasses"){}
     }
 }
 
@@ -101,6 +102,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
+
     buildFeatures {
         compose = true
     }
