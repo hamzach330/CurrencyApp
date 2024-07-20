@@ -19,7 +19,7 @@ data class MetaData(
 )
 
 @Serializable
-open class Currency : RealmObject {
+open class Currency: RealmObject {
     @PrimaryKey
     var _id: ObjectId = ObjectId()
     var code: String = ""

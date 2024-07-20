@@ -42,16 +42,15 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
 
+
             implementation(libs.koin.core)
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.screen.model)
-            implementation(libs.voyager.transitions)
-            implementation(libs.voyager.koin)
 
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
 
+            //voyager-navigation
+            implementation(libs.bundles.voyager)
+            //ktor-client
+            implementation(libs.bundles.ktorCommon)
+            //kotlin-date-time lib
             implementation(libs.kotlinx.datetime)
 
             implementation(libs.multiplatform.settings.no.arg)

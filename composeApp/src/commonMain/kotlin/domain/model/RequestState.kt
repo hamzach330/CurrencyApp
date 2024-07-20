@@ -29,8 +29,6 @@ sealed class RequestState<out T> {
     fun getErrorMessage(): String = (this as Error).message
 }
 
-
-//Utility Function which will return data based on the state of the request.
 @Composable
 fun <T> RequestState<T>.DisplayResult(
     onIdle: (@Composable () -> Unit)? = null,
